@@ -1,35 +1,11 @@
 const express = require('express');
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const keys = require('./config/keys');
+require('./services/passport');
 
 // Sets up configuration that will listen for incoming requests 
 const app = express();
 
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: keys.googleClientID,
-      clientSecret: keys.googleClientSecret,
-      callbackURL: '/auth/google/callback'
-    }, (accessToken, refreshToken, profile, done) => {
-      // accessToken is the uniqueID we can save in our database
-      console.log('accessToken:', accessToken);
-      console.log('refreshToken:', refreshToken);
-      console.log('profile:', profile);
-    }
-  )
-);
-
-// User hits this route to begin oauth process
-app.get(
-  '/auth/google', 
-  passport.authenticate('google', {
-    scope: ['profile', 'email']
-  })
-);
-
-app.get('/auth/google/callback', passport.authenticate('google'));
+// Require returns a function, and we call it with the (app) object
+require('./routes/authRoutes')(app);
 
 // Dynamically figure out what Heroku tells us to listen to 
 const PORT = process.env.PORT || 5000;
