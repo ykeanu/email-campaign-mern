@@ -1,13 +1,11 @@
 const express = require('express');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-// Single application of express
 // Sets up configuration that will listen for incoming requests 
-  // that are being routed
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send({ bye: 'buddy' });
-});
+passport.use(new GoogleStrategy());
 
 // Dynamically figure out what Heroku tells us to listen to 
 const PORT = process.env.PORT || 5000;
