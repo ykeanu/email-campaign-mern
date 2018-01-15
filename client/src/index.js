@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 // Provider is the "glue"
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import reduxThunk from 'redux-thunk';
 
 import App from './components/App';
 import reducers from './reducers';
@@ -13,7 +14,7 @@ import reducers from './reducers';
 // (1) all different reducers in app 
 // (2) initial state of app, good for server side rendering 
 // (3) Middleware
-const store = createStore(reducers, {}, applyMiddleware());
+const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 // Two arguments: (1) root component, (2) where we attempt to render inside dom
 ReactDOM.render(
