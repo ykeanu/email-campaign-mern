@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+import App from './components/App';
+
+// Two arguments: (1) root component, (2) where we attempt to render inside dom
+ReactDOM.render(<App />, document.querySelector('#root'));
