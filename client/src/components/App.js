@@ -2,6 +2,10 @@
 // Back-end, only has support with common js (ex: require)
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+// gives components ability to use action creators
+import { connect } from 'react-redux';
+// import all (*) action creators to find and assign to object actoins
+import * as actions from '../actions';
 
 import Header from './Header';
 const Dashboard = () => <h2>Dashboard</h2>
@@ -12,7 +16,7 @@ class App extends Component {
   
   // Instant component mounts on the screen grab current user
   componentDidMount() {
-
+    this.props.fetchUser();
   }
   
   render() {
@@ -33,4 +37,5 @@ class App extends Component {
   }
 };
 
-export default App;
+// Two arguments, (1) mapStateToProps and (2) actions
+export default connect(null, actions)(App);
