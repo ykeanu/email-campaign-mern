@@ -25,8 +25,8 @@ module.exports = app => {
   app.get("/api/logout", (req, res) => {
     // Function attached automatically to request object by passport
     req.logout();
-    // Test to see if you are no longer signed in, should return 'undefined'
-    res.send(req.user);
+    // Redirects to root page after logging out
+    res.redirect('/');
   });
 
   // Test if req.user exists, if so cookie works
